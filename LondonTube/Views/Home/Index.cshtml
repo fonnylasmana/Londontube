@@ -1,0 +1,53 @@
+﻿@model LondonTube.Models.LondonTubeModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="form-horizontal">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-12">
+                <h4>From Station</h4>
+                <p>
+                    @Html.DropDownListFor(model => model.StationId, new SelectList(new LondonTube.Helper.HTMLHelper().GetStations(), "Value", "Text"), "-Please Select a Station-", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StationId, "", new { @class = "text-danger" })
+                </p>
+
+            </div>
+            
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <h4>Number of Stops</h4>
+                    <p>
+                        @Html.EditorFor(model => model.NoOfStation)
+                        @Html.ValidationMessageFor(model => model.NoOfStation, "", new { @class = "text-danger" })
+                    </p>
+
+                </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Submit" />
+                    </div>
+                    </div>
+                    }
+    @if (Model.StationModelList != null)
+    {
+        foreach (var mo in Model.StationModelList)
+                {
+            <div class="form-group">
+               
+                <div class="col-md-2">
+                     @Html.DisplayFor(m => mo.ToStation)
+                </div>
+            </div>
+        }
+    }
+                    
+
+                </div>
