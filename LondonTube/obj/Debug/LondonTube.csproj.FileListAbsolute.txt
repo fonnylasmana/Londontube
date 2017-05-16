@@ -206,3 +206,4 @@ C:\Fonny\LondonTunnelRepo\Londontube\LondonTube\obj\Debug\LondonTube.dll
 C:\Fonny\LondonTunnelRepo\Londontube\LondonTube\obj\Debug\LondonTube.pdb
 C:\Fonny\LondonTunnelRepo\Londontube\LondonTube\bin\App_Data\LondonTube.mdf
 C:\Fonny\LondonTunnelRepo\Londontube\LondonTube\bin\App_Data\LondonTube_log.ldf
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTube\bin\BuildTasks.dll
