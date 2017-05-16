@@ -35,12 +35,12 @@ namespace LondonTube.Controllers
                 List<StationModel> smFrom = GetStationModelFrom(s.StationName, model.NoOfStation);
                 List<StationModel> smTo = GetStationModelTo(s.StationName, model.NoOfStation);
                 ltm.StationModelList = new List<StationModel>();
-                //for (int i = 0; i < smFrom.Count; i++)
-                //{
-                //    string ToStation = smFrom[i].ToStation;
-                //    if (!ltm.StationModelList.Any(l => l.ToStation == ToStation))
-                //       ltm.StationModelList.Add(smFrom[i]);
-                //}
+                for (int i = 0; i < smFrom.Count; i++)
+                {
+                    string ToStation = smFrom[i].ToStation;
+                    if (!ltm.StationModelList.Any(l => l.ToStation == ToStation))
+                        ltm.StationModelList.Add(smFrom[i]);
+                }
                 for (int j = 0; j < smTo.Count; j++)
                 {
                     StationModel smToj = new StationModel();
