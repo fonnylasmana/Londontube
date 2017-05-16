@@ -19,6 +19,9 @@ namespace LondonTubeDB.Model
         [Display(Name = "To Station")]
         public string ToStation { get; set; }
 
+        [Display(Name = "Express")]
+        public bool Express { get; set; }
+
     }
 }
 

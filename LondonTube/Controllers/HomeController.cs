@@ -35,10 +35,12 @@ namespace LondonTube.Controllers
                 List<StationModel> smFrom = GetStationModelFrom(s.StationName, model.NoOfStation);
                 List<StationModel> smTo = GetStationModelTo(s.StationName, model.NoOfStation);
                 ltm.StationModelList = new List<StationModel>();
-                for (int i = 0; i < smFrom.Count; i++)
-                {
-                    ltm.StationModelList.Add(smFrom[i]);
-                }
+                //for (int i = 0; i < smFrom.Count; i++)
+                //{
+                //    string ToStation = smFrom[i].ToStation;
+                //    if (!ltm.StationModelList.Any(l => l.ToStation == ToStation))
+                //       ltm.StationModelList.Add(smFrom[i]);
+                //}
                 for (int j = 0; j < smTo.Count; j++)
                 {
                     StationModel smToj = new StationModel();
@@ -62,7 +64,9 @@ namespace LondonTube.Controllers
             List<TubeLine> tsA = (from tls in dc.TubeLines
                                   where tls.FromStation == StationName
                                   select tls).ToList();
+            
             int iCount = 1;
+            List<TubeLine> tsA_Ex = new List<TubeLine>();
             while (iCount < NoOfStation)
             {
                 List<StationModel> smlA = new List<StationModel>();
@@ -105,6 +109,7 @@ namespace LondonTube.Controllers
             List<TubeLine> tsTot = new List<TubeLine>();
             string ToStation = "";
             string FromStation = "";
+            string TubeLineName = "";
             if (tlInput.Count > 0)
             {
                 List<StationModel> smlD = new List<StationModel>();
@@ -113,13 +118,24 @@ namespace LondonTube.Controllers
                     StationModel smD = new StationModel();
                     smD.FromStation = tlInput[d].FromStation;
                     smD.ToStation = tlInput[d].ToStation;
+                    smD.TubeLineName = tlInput[d].TubeLineName;
                     smlD.Add(smD);
+
                     ToStation = tlInput[d].ToStation;
                     FromStation = tlInput[d].FromStation;
+                    TubeLineName = tlInput[d].TubeLineName;
+
                     tsE = (from tls in dc.TubeLines
-                           where tls.FromStation == ToStation
-                           && tls.ToStation != FromStation
+                           where (tls.FromStation == ToStation && tls.ToStation != FromStation) 
                            select tls).ToList();
+                    if (tlInput[d].Express == true)
+                    {
+                        foreach(var e in GetTubeLineExpress(tlInput[d]))
+                        {
+                            tsTot.Add(e);
+                        }
+                    
+                    }
                     foreach (var t in tsE)
                     {
                         tsTot.Add(t);
@@ -221,6 +237,57 @@ namespace LondonTube.Controllers
                     }
                 }
             }
+            return tsTot;
+        }
+        public List<TubeLine> GetTubeLineExpress(TubeLine tlInput)
+        {
+            LTContext dc = new LTContext(ConfigurationManager.ConnectionStrings["LondonTube"].ConnectionString);
+            TubeLine tsTo = new TubeLine();
+            TubeLine tsFrom = new TubeLine();
+            List<TubeLine> tsRegsFrom = new List<TubeLine>();
+            List<TubeLine> tsRegsTo = new List<TubeLine>();
+            List<TubeLine> tsTot = new List<TubeLine>();
+
+            string ToStation = "";
+            string FromStation = "";
+            string TubeLineName = "";
+
+            ToStation = tlInput.ToStation;
+            FromStation = tlInput.FromStation;
+            TubeLineName = tlInput.TubeLineName;
+            tsTo = (from tls in dc.TubeLines
+                    where (tls.ToStation == ToStation)
+                    && tls.TubeLineName != TubeLineName
+                    && tls.Express == true
+                    select tls).FirstOrDefault();
+            tsFrom = (from tls in dc.TubeLines
+                            where (tls.FromStation == ToStation)
+                            && tls.TubeLineName != TubeLineName
+                            && tls.Express == true
+                            select tls).FirstOrDefault();
+            tsRegsTo = (from tls in dc.TubeLines
+                          where (tls.ToStation == ToStation)
+                          && tls.TubeLineName != TubeLineName
+                          && tls.Express == false
+                          select tls).ToList();
+            tsRegsFrom = (from tls in dc.TubeLines
+                              where (tls.FromStation == ToStation)
+                              && tls.TubeLineName != TubeLineName
+                              && tls.Express == false
+                              select tls).ToList();
+            if (tsFrom != null)
+                tsTot.Add(tsFrom);
+            if (tsTo != null)
+                tsTot.Add(new TubeLine { FromStation = tsTo.ToStation, ToStation = tsTo.FromStation, TubeLineName = tsTo.TubeLineName, Express = tsTo.Express });
+            foreach (var tf in tsRegsFrom)
+            {
+                tsTot.Add(tf);
+            }
+            foreach (var tt in tsRegsTo)
+            {
+                tsTot.Add(new TubeLine { FromStation = tt.ToStation, ToStation = tt.FromStation, TubeLineName = tt.TubeLineName, Express = tt.Express });
+            }
+
             return tsTot;
         }
         public ActionResult About()

@@ -10,3 +10,13 @@ C:\Fonny\LondonTunnelRepo\LondonTubeDB\bin\Debug\EntityFramework.SqlServer.xml
 C:\Fonny\LondonTunnelRepo\LondonTubeDB\obj\Debug\LondonTubeDB.dll
 C:\Fonny\LondonTunnelRepo\LondonTubeDB\obj\Debug\LondonTubeDB.pdb
 C:\Fonny\LondonTunnelRepo\LondonTubeDB\obj\Debug\LondonTubeDB.csprojResolveAssemblyReference.cache
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\LondonTubeDB.dll.config
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\LondonTubeDB.dll
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\LondonTubeDB.pdb
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\EntityFramework.dll
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\EntityFramework.SqlServer.dll
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\EntityFramework.xml
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\bin\Debug\EntityFramework.SqlServer.xml
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\obj\Debug\LondonTubeDB.csprojResolveAssemblyReference.cache
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\obj\Debug\LondonTubeDB.dll
+C:\Fonny\LondonTunnelRepo\Londontube\LondonTubeDB\obj\Debug\LondonTubeDB.pdb

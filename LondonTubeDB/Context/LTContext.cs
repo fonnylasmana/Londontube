@@ -7,6 +7,7 @@ namespace LondonTubeDB.Context
     {
         public DbSet<TubeLine> TubeLines { get; set; }
         public DbSet<Station> Stations { get; set; }
+        public DbSet<UniqueStation> UniqueStations { get; set; }
 
         public LTContext() { }
         public LTContext(string connectionString) : base(connectionString) { }
